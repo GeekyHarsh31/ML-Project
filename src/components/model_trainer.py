@@ -16,6 +16,7 @@ from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object
 from src.utils import evaluate_models
+import joblib
 #from src.components.data_ingestion import DataIngestion
 #from src.components.data_transformation import DataTransformation
 @dataclass
@@ -41,7 +42,7 @@ class ModelTrainer:
                 "Gradient Boosting":GradientBoostingRegressor(),
                 "Linear Regression":LinearRegression(),
                 "K-Neighbours Classifiers":KNeighborsRegressor(),
-                "XGBClassifier" : XGBRFRegressor(),
+                "XGBRegressor": XGBRFRegressor(),
                 "CatBoosting Classifier": CatBoostRegressor(verbose = False),
                 "AdaBoost Classifier": AdaBoostRegressor()
             }
@@ -97,12 +98,13 @@ class ModelTrainer:
                 raise CustomException("No best model found")
             logging.info(f"Best found model on both training and testing dataset")
 
+
+            best_model.fit(X_train,y_train)
+
             save_object(
                 file_path = self.model_trainer_config.trained_model_file_path,
                 obj=best_model
             )
-            best_model = models[best_model_name]
-            best_model.fit(X_train,y_train)
             predicted = best_model.predict(X_test)
 
             r2_square = r2_score(y_test,predicted)

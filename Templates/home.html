@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Exam Performance Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      width: 400px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #ffe600;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background-color: #f0f0f0;
+      color: #333;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #ffe600;
+      color: #333;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffcc00;
+    }
+
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 18px;
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎓 Predict Your Math Score</h1>
+    <form action="/predictdata" method="post">
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender">
+        <option value="">Select your Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+
+      <label for='race/ethnicity'>Race or Ethnicity</label>
+      <select id='race/ethnicity' name='race/ethnicity'>
+        <option value="">Select Ethnicity</option>
+        <option value="group A">Group A</option>
+        <option value="group B">Group B</option>
+        <option value="group C">Group C</option>
+        <option value="group D">Group D</option>
+        <option value="group E">Group E</option>
+      </select>
+
+      <label for='parental level of education'>Parental Level of Education</label>
+      <select id='parental_level_of_education' name='parental_level_of_education'>
+        <option value="">Select Parent Education</option>
+        <option value="high school">High School</option>
+        <option value="associate's degree">Associate's Degree</option>
+        <option value="bachelor's degree">Bachelor's Degree</option>
+        <option value="master's degree">Master's Degree</option>
+      </select>
+
+      <label for="lunch">Lunch Type</label>
+      <select id="lunch" name="lunch">
+        <option value="">Select Lunch Type</option>
+        <option value="standard">Standard</option>
+        <option value="free/reduced">Free/Reduced</option>
+      </select>
+
+      <label for='test preparation course'>Test Preparation Course</label>
+      <select id='test_preparation_course' name='test_preparation_course'>
+        <option value="">Select Test Course</option>
+        <option value="none">None</option>
+        <option value="completed">Completed</option>
+      </select>
+
+      <label for='writing score'>Writing Score (out of 100)</label>
+      <input type="number" id='writing_score' name='writing_score' min="0" max="100" required />
+
+      <label for="reading score">Reading Score (out of 100)</label>
+      <input type="number" id="reading_score" name="reading_score" min="0" max="100" required />
+
+      <button type="submit">Predict your Maths Score</button>
+    </form>
+    <div class="result">
+      The Prediction is {{results}}
+    </div>
+  </div>
+</body>
+</html>
